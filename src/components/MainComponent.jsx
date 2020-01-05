@@ -1,7 +1,9 @@
 import React from 'react';
-import { Container, Grid, Header, Menu } from 'semantic-ui-react'
+import { Container, Grid } from 'semantic-ui-react'
 import CardComponent from './Card';
 import TableComponent from './Table';
+import HeaderComponent from './Header';
+import FooterComponent from './Footer';
 
 export default class MainComponent extends React.Component {
     state = {
@@ -39,10 +41,7 @@ export default class MainComponent extends React.Component {
     render() {
         return (
             <Container text>
-                <Header />
-                <Header textAlign="center" block>
-                    Tipaton Tammikuu {this.state.year}
-                </Header>
+                <HeaderComponent {...this.state} />
                 <Grid stackable columns={3}>
                     <Grid.Column>
                         <CardComponent header={"Päivä " + this.state.dateTime.getDate() + "/31"} />
@@ -58,15 +57,8 @@ export default class MainComponent extends React.Component {
                         </CardComponent>
                     </Grid.Column>
                 </Grid>
-                <Menu borderless fixed="bottom">
-                    <Menu.Item>
-                        Janoisena tämäkin idea syntyi
-                    </Menu.Item>
-                    <Menu.Item position="right">
-                        <a href="https://github.com/T-101/tipaton">Github</a>
-                    </Menu.Item>
-                </Menu>
-            </Container >
+                <FooterComponent />
+            </Container>
         )
     }
 }
