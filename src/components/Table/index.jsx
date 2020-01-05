@@ -40,11 +40,11 @@ export default class TableComponent extends React.Component {
         ]
 
         return (
-            <Table>
+            <Table basic="very" celled unstackable>
                 <Table.Body>
                     {tableContents.map((row, key) => (
                         <Table.Row key={key}>
-                            <Table.Cell>{this.getRemaining(row.short)}</Table.Cell>
+                            <Table.Cell textAlign="right">{this.getRemaining(row.short)}</Table.Cell>
                             <Table.Cell>{row.long}</Table.Cell>
                         </Table.Row>
                     ))}
