@@ -39,8 +39,8 @@ export default class MainComponent extends React.Component {
     render() {
         return (
             <Container text>
-                <Header>&nbsp;</Header>
-                <Header textAlign="center">
+                <Header />
+                <Header textAlign="center" block>
                     Tipaton Tammikuu {this.state.year}
                 </Header>
                 <Grid stackable columns={3}>
