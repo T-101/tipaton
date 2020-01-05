@@ -48,7 +48,7 @@ export default class MainComponent extends React.Component {
                         <CardComponent header={"Päivä " + this.state.dateTime.getDate() + "/31"} />
                     </Grid.Column>
                     <Grid.Column>
-                        <CardComponent header={this.getPercent() + " % Kärsitty"}>
+                        <CardComponent header={this.getPercent() + " % Kärsitty"} divider={true}>
                             {Number(100 - this.getPercent()).toFixed(3)} % jäljellä
                         </CardComponent>
                     </Grid.Column>
