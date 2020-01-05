@@ -5,7 +5,7 @@ export default class CardComponent extends React.Component {
     render() {
         const headerTextAlign = this.props.headerTextAlign || "center";
         return (
-            <Card>
+            <Card fluid>
                 <Card.Content>
                     <Card.Header textAlign={headerTextAlign}>
                         {this.props.header}
