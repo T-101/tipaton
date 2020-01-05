@@ -1,23 +1,25 @@
 import React from 'react';
 import { Container, Grid, Header, Menu } from 'semantic-ui-react'
 import CardComponent from './Card';
+import TableComponent from './Table';
 
 export default class MainComponent extends React.Component {
     state = {
-        year: null,
+        year: new Date().getFullYear(),
         dateTime: new Date(),
         timerHandler: null
     }
 
     updateDateTime = () => {
+        const date = new Date();
         this.setState({
-            dateTime: new Date()
+            year: date.getFullYear(),
+            dateTime: date
         })
     }
 
     componentDidMount() {
         this.setState({
-            year: new Date().getFullYear(),
             timerHandler: setInterval(() => this.updateDateTime(), 1000)
         })
     }
@@ -28,41 +30,10 @@ export default class MainComponent extends React.Component {
         })
     }
 
-    getDate = () => {
-        const dateTime = this.state.dateTime;
-        return dateTime ? dateTime.getDate() : 0
-    }
-
     getPercent = () => {
         const janSeconds = new Date(this.state.year, 1, 1) - new Date(this.state.year, 0, 1)
         const secondsElapsed = this.state.dateTime - new Date(this.state.year, 0, 1)
         return Number((secondsElapsed / janSeconds) * 100).toFixed(3);
-    }
-
-    getRemaining = (precision) => {
-        const janSeconds = Number((new Date(this.state.year, 1, 1) - new Date(this.state.year, 0, 1)) / 1000).toFixed(0);
-        const millisecondsElapsed = (this.state.dateTime - new Date(this.state.year, 0, 1));
-        const secondsElapsed = Number((millisecondsElapsed / 1000)).toFixed(0);
-        const remaining = janSeconds - secondsElapsed;
-        let multiplier = 1;
-        switch (precision) {
-            case "min":
-                multiplier *= 60;
-                break;
-            case "hour":
-                multiplier *= 3600;
-                break;
-            case "day":
-                multiplier *= 86400;
-                break;
-            case "week":
-                multiplier *= 604800;
-                break;
-            default:
-                break
-        }
-        if (multiplier >= 86400) return Number(remaining / multiplier).toFixed(2);
-        return Math.floor(remaining / multiplier);
     }
 
     render() {
@@ -74,9 +45,7 @@ export default class MainComponent extends React.Component {
                 </Header>
                 <Grid stackable columns={3}>
                     <Grid.Column>
-                        <CardComponent header={"Päivä " + this.getDate() + "/31"}>
-
-                        </CardComponent>
+                        <CardComponent header={"Päivä " + this.state.dateTime.getDate() + "/31"} />
                     </Grid.Column>
                     <Grid.Column>
                         <CardComponent header={this.getPercent() + " % Kärsitty"}>
@@ -85,30 +54,7 @@ export default class MainComponent extends React.Component {
                     </Grid.Column>
                     <Grid.Column>
                         <CardComponent header="Jäljellä">
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td>{this.getRemaining("sec")}</td>
-                                        <td>sekuntia</td>
-                                    </tr>
-                                    <tr>
-                                        <td>{this.getRemaining("min")}</td>
-                                        <td>minuuttia</td>
-                                    </tr>
-                                    <tr>
-                                        <td>{this.getRemaining("hour")}</td>
-                                        <td>tuntia</td>
-                                    </tr>
-                                    <tr>
-                                        <td>{this.getRemaining("day")}</td>
-                                        <td>päivää</td>
-                                    </tr>
-                                    <tr>
-                                        <td>{this.getRemaining("week")}</td>
-                                        <td>viikkoa</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <TableComponent {...this.state} />
                         </CardComponent>
                     </Grid.Column>
                 </Grid>
