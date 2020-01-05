@@ -40,7 +40,7 @@ export default class TableComponent extends React.Component {
         ]
 
         return (
-            <Table basic="very" celled unstackable>
+            <Table basic="very" compact celled unstackable>
                 <Table.Body>
                     {tableContents.map((row, key) => (
                         <Table.Row key={key}>
