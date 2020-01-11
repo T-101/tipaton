@@ -44,7 +44,9 @@ export default class MainComponent extends React.Component {
                 <HeaderComponent {...this.state} />
                 <Grid stackable columns={3}>
                     <Grid.Column>
-                        <CardComponent header={"Päivä " + this.state.dateTime.getDate() + "/31"} />
+                        <CardComponent header={"Päivä " + this.state.dateTime.getDate() + "/31"}>
+                            Devaaja murtui 10. päivä
+                        </CardComponent>
                     </Grid.Column>
                     <Grid.Column>
                         <CardComponent header={this.getPercent() + " % Kärsitty"} divider={true}>
