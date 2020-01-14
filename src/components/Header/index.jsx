@@ -7,6 +7,7 @@ export default class HeaderComponent extends React.Component {
             <>
                 <Header />
                 <Header textAlign="center" block>
+                    {this.props.altered && 'Melkein '}
                     Tipaton Tammikuu {this.props.year}
                 </Header>
             </>
