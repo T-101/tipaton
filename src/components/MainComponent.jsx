@@ -4,9 +4,11 @@ import CardComponent from './Card';
 import TableComponent from './Table';
 import HeaderComponent from './Header';
 import FooterComponent from './Footer';
+import { alteredStartDate, elapsedDays, getPercent } from '../utils';
 
 export default class MainComponent extends React.Component {
     state = {
+        altered: alteredStartDate(),
         year: new Date().getFullYear(),
         dateTime: new Date(),
         timerHandler: null
@@ -32,25 +34,19 @@ export default class MainComponent extends React.Component {
         })
     }
 
-    getPercent = () => {
-        const janSeconds = new Date(this.state.year, 1, 1) - new Date(this.state.year, 0, 1)
-        const secondsElapsed = this.state.dateTime - new Date(this.state.year, 0, 1)
-        return Number((secondsElapsed / janSeconds) * 100).toFixed(3);
-    }
-
     render() {
         return (
             <Container text>
                 <HeaderComponent {...this.state} />
                 <Grid stackable columns={3}>
                     <Grid.Column>
-                        <CardComponent header={"Päivä " + this.state.dateTime.getDate() + "/31"}>
-                            Devaaja murtui 10. päivä
+                        <CardComponent header={"Päivä " + elapsedDays(this) + "/31"}>
+                            {this.state.altered ? null : "Devaaja murtui 10. päivä"}
                         </CardComponent>
                     </Grid.Column>
                     <Grid.Column>
-                        <CardComponent header={this.getPercent() + " % Kärsitty"} divider={true}>
-                            {Number(100 - this.getPercent()).toFixed(3)} % jäljellä
+                        <CardComponent header={getPercent(this) + " % Kärsitty"} divider={true}>
+                            {Number(100 - getPercent(this)).toFixed(3)} % jäljellä
                         </CardComponent>
                     </Grid.Column>
                     <Grid.Column>
