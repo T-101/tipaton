@@ -22,7 +22,7 @@ export function alteredStartDate() {
 
 function start() {
     const day = alteredStartDate() ? alteredStartDate() : "01";
-    return new Date(`2020-01-${day} 00:00`)
+    return new Date(`2020-01-${day}T00:00`)
 };
 
 function end() {
