@@ -38,7 +38,7 @@ export function elapsedDays(that) {
 export function getPercent(that) {
     const janSeconds = end() - start();
     const secondsElapsed = that.state.dateTime - start()
-    return Number((secondsElapsed / janSeconds) * 100).toFixed(3);
+    return secondsElapsed < 0 ? Number(0).toFixed(3) : Number((secondsElapsed / janSeconds) * 100).toFixed(3);
 }
 
 export function getRemaining(that, precision) {
