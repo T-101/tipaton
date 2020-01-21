@@ -1,20 +1,20 @@
 import React from 'react';
-import { Card, Divider } from 'semantic-ui-react';
+import { Card as SemanticCard, Divider } from 'semantic-ui-react';
 
-export default class CardComponent extends React.Component {
+export default class Card extends React.Component {
     render() {
         const headerTextAlign = this.props.headerTextAlign || "center";
         const divider = this.props.divider;
         return (
-            <Card fluid>
-                <Card.Content>
-                    <Card.Header textAlign={headerTextAlign}>
+            <SemanticCard fluid>
+                <SemanticCard.Content>
+                    <SemanticCard.Header textAlign={headerTextAlign}>
                         {this.props.header}
-                    </Card.Header>
+                    </SemanticCard.Header>
                     {divider && <Divider />}
                     {this.props.children}
-                </Card.Content>
-            </Card>
+                </SemanticCard.Content>
+            </SemanticCard>
         )
     }
 }
