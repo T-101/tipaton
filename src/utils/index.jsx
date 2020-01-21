@@ -24,21 +24,21 @@ function start() {
     const day = alteredStartDate() ? alteredStartDate() : "01";
     const year = new Date().getFullYear();
     return new Date(`${year}-01-${day}T00:00`)
-};
+}
 
 function end() {
     let then = start();
     then.setDate(then.getDate() + 31);
     return then
-};
+}
 
-export function elapsedDays(that) {
-    return Math.ceil((that.state.dateTime - start()) / 1000 / 60 / 60 / 24);
-};
+export function elapsedDays() {
+    return Math.ceil((new Date() - start()) / 1000 / 60 / 60 / 24);
+}
 
-export function getPercent(that) {
+export function getPercent() {
     const janSeconds = end() - start();
-    const secondsElapsed = that.state.dateTime - start()
+    const secondsElapsed = new Date() - start();
     return secondsElapsed < 0 ? Number(0).toFixed(3) : Number((secondsElapsed / janSeconds) * 100).toFixed(3);
 }
 
