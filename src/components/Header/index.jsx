@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Header } from 'semantic-ui-react';
 
-export default class HeaderComponent extends React.Component {
-    render() {
-        return (
-            <>
-                <Header />
-                <Header textAlign="center" block>
-                    {this.props.altered && 'Melkein '}
-                    Tipaton Tammikuu {this.props.year}
-                </Header>
-            </>
-        )
-    }
+const HeaderComponent = (props) => {
+    const [alternateTitle, setAlternateTitle] = useState(false);
+    return (
+        <>
+            <Header />
+            <Header textAlign="center" block>
+                <div
+                    onMouseOver={() => setAlternateTitle(true)}
+                    onMouseLeave={() => setAlternateTitle(false)}
+                >
+                    {props.altered && 'Melkein '}
+                    {alternateTitle
+                        ? 'Dropless Zäni '
+                        : 'Tipaton Tammikuu '}
+                    {props.year}
+                </div>
+            </Header>
+        </>
+    )
 }
+
+export default HeaderComponent
