@@ -20,8 +20,12 @@ export function alteredStartDate() {
     }
 }
 
+function leftPad(number) {
+    return number < 10 ? "0" + number : number
+}
+
 function start() {
-    const day = alteredStartDate() ? alteredStartDate() : "01";
+    const day = alteredStartDate() ? leftPad(alteredStartDate()) : "01";
     const year = new Date().getFullYear();
     return new Date(`${year}-01-${day}T00:00`)
 }
