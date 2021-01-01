@@ -10,7 +10,7 @@ export default class Grid extends React.Component {
             <SemanticGrid stackable columns={3}>
                 <SemanticGrid.Column>
                     <Card header={"Päivä " + elapsedDays() + "/31"}>
-                        {this.props.altered ? null : "Devaaja murtui 10. päivä"}
+                        {/*{this.props.altered ? null : "Devaaja murtui 10. päivä"}*/}
                     </Card>
                 </SemanticGrid.Column>
                 <SemanticGrid.Column>
