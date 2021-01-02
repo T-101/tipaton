@@ -1,6 +1,6 @@
 import {Grid as SemanticGrid} from "semantic-ui-react";
 import Card from "../Card";
-import {elapsedDays, getPercent} from "../../utils";
+import {elapsedDays, getPercent, getLevelName} from "../../utils";
 import TableComponent from "../Table";
 import React from "react";
 
@@ -17,6 +17,10 @@ export default class Grid extends React.Component {
                     <Card header={getPercent() + " % Kärsitty"} divider={true}>
                         {Number(100 - getPercent()).toFixed(3)} % jäljellä
                     </Card>
+                    <Card header="Olet tasolla">
+                        {getLevelName(Number(getPercent()))}
+                    </Card>
+
                 </SemanticGrid.Column>
                 <SemanticGrid.Column>
                     <Card header="Jäljellä">
