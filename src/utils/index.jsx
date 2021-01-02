@@ -71,3 +71,22 @@ export function getRemaining(that, precision) {
     if (multiplier >= 86400) return Number(remaining / multiplier).toFixed(2);
     return Math.floor(remaining / multiplier);
 }
+
+export function getLevelName(percent) {
+    const levels = [
+        {percent: 0, name: "Kraanavesi"},
+        {percent: 2.6, name: "Teinilonkero"},
+        {percent: 4.4, name: "Koff III"},
+        {percent: 6, name: "IPA"},
+        {percent: 13, name: "Punaviini"},
+        {percent: 21, name: "Gambina"},
+        {percent: 32, name: "Salmiakkikossu"},
+        {percent: 38, name: "Koskenkorva"},
+        {percent: 50, name: "Minttuviina"},
+        {percent: 80, name: "Stroh rum"},
+        {percent: 96, name: "Spiritus Fortius"}
+    ]
+    for (let i = 0; i < levels.length; i++) {
+        if (percent < levels[i].percent) return levels[i - 1].name
+    }
+}
