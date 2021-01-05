@@ -110,7 +110,7 @@ export function getLevelName(percent) {
         {percent: 41.5, name: "Sierra Milenario Extra Añejo Tequila"},
         {percent: 42, name: "Smakbyns Apelbrand"},
         {percent: 43, name: "Lagavulin"},
-        {percent: 43.7, name: Ägräs Akvavit"},
+        {percent: 43.7, name: "Ägräs Akvavit"},
         {percent: 44, name: "Hammer & Son Gin"},
         {percent: 45, name: "Maker's Mark"},
         {percent: 45.7, name: "Michter's Small Batch Bourbon"},
