@@ -84,6 +84,7 @@ export function getLevelName(percent) {
         {percent: 11, name: "Aperol"},
         {percent: 13, name: "Punaviini"},
         {percent: 15, name: "Vermouth Bianco"},
+        {percent: 16, name: "Kilju"},
         {percent: 17, name: "Baileys"},
         {percent: 18, name: "Puolukkavodka Cocktail"},
         {percent: 19, name: "Royal Salmiakki Snapsi"},
