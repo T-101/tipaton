@@ -94,10 +94,22 @@ export function getLevelName(percent) {
         {percent: 40, name: "Russian Standard"},
         {percent: 43, name: "Lagavulin"},
         {percent: 45, name: "Makers Mark"},
+        {percent: 45.8, name: "Talisker 10 Year Old Single Malt"},
         {percent: 46.3, name: "Napue Gin"},
+        {percent: 48, name: "Laphroaig Quarter Cask Single Malt"},
         {percent: 50, name: "Minttuviina"},
-        {percent: 80, name: "Stroh rum"},
-        {percent: 96, name: "Spiritus Fortius"}
+        {percent: 57.1, name: "Ardbeg Corryvreckan Single Malt"},
+        {percent: 60, name: "Kaatoryyppy"},
+        {percent: 69, name: "Clarke's Court Spicy Rum"},
+        {percent: 70, name: "King of Spirits Absinthe"},
+        {percent: 75.5, name: "Bacardi 151"},
+        {percent: 80, name: "John Crow Batty Rum"},
+        {percent: 88, name: "Balkan 176 Vodka"},
+        {percent: 88.8, name: "Pincer Shanghai Strength"},
+        {percent: 90, name: "River Antoine Royale Rum"},
+        {percent: 92, name: "Bruichladdich X4"},
+        {percent: 95, name: "Everclear"},
+        {percent: 96, name: "Spiritus Fortis"}
     ]
     for (let i = 0; i < levels.length; i++) {
         if (percent < levels[i].percent) return levels[i - 1].name
