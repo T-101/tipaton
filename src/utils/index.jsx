@@ -103,7 +103,7 @@ export function getLevelName(percent) {
         {percent: 32, name: "Salmiakkikossu"},
         {percent: 33, name: "Fireball"},
         {percent: 35, name: "Jägermeister"},
-        {percent: 38, name: "Corona Finest Napoleon"},
+        {percent: 36, name: "Corona Finest Napoleon"},
         {percent: 37, name: "Concorde XO"},
         {percent: 37.5, name: "Kopparberg Premium Gin Strawberry & Lime"},
         {percent: 38, name: "Koskenkorva"},
