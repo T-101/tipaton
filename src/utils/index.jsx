@@ -149,7 +149,8 @@ export function getLevelName(percent) {
         {percent: 90, name: "River Antoine Royale Rum"},
         {percent: 92, name: "Bruichladdich X4"},
         {percent: 95, name: "Everclear"},
-        {percent: 100, name: "Spiritus Fortis"}
+        {percent: 96, name: "Spiritus Fortis"},
+        {percent: 100, name: "Elysium"}
     ]
     for (let i = 0; i < levels.length; i++) {
         if (percent < levels[i].percent) return levels[i - 1].name
