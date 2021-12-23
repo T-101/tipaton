@@ -11,26 +11,25 @@ export function getJsonFromUrl(url) {
 
 export function alteredStartDate() {
     const params = getJsonFromUrl();
-    if ("start" in params) {
-        if (Number(params.start)) {
-            if (0 < Number(params.start) && Number(params.start) < 32) {
-                return params.start
-            }
-        }
+    return "start" in params && Number(params.start) ? Number(params.start) : 0
+}
+
+export function getRequiredYear(date) {
+    const _date = new Date(date)
+    if (alteredStartDate() < 0) {
+        _date.setFullYear(_date.getFullYear() + 1)
     }
+    return _date.getFullYear()
 }
 
-function leftPad(number) {
-    return number < 10 ? "0" + number : number
+export function start() {
+    const year = getRequiredYear(new Date())
+    let date = new Date(`${year}-01-01T00:00`)
+    date.setDate(date.getDate() + alteredStartDate())
+    return date
 }
 
-function start() {
-    const day = alteredStartDate() ? leftPad(alteredStartDate()) : "01";
-    const year = new Date().getFullYear();
-    return new Date(`${year}-01-${day}T00:00`)
-}
-
-function end() {
+export function end() {
     let then = start();
     then.setDate(then.getDate() + 31);
     return then
@@ -155,4 +154,10 @@ export function getLevelName(percent) {
     for (let i = 0; i < levels.length; i++) {
         if (percent < levels[i].percent) return levels[i - 1].name
     }
+}
+
+export function developerCracked(dateString) {
+    if (!dateString) return false
+    const date = new Date(dateString)
+    return date > start() ? date : false
 }
