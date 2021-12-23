@@ -11,8 +11,8 @@ export default function Grid(props) {
                 <Card
                     header={"Päivä " + elapsedDays() + "/31"}
                     altered={props.altered}
-                    start={start().toISOString().slice(0, 10)}
-                    end={end().toISOString().slice(0, 10)}
+                    start={start().toDateString()}
+                    end={end().toDateString()}
                 >
                     {props.developerCracked && "Devaaja murtui " + props.developerCracked.getDate() + ". päivä"}
                 </Card>
