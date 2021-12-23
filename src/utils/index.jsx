@@ -11,7 +11,7 @@ export function getJsonFromUrl(url) {
 
 export function alteredStartDate() {
     const params = getJsonFromUrl();
-    return "start" in params && Number(params.start) ? Number(params.start) : 0
+    return "start" in params && Number(params.start) && Math.abs(params.start) < 365? Number(params.start) : 0
 }
 
 export function getRequiredYear(date) {
