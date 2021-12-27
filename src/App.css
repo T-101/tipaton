@@ -7,3 +7,9 @@ body {
   text-align: center;
   /* background-color: #282c34; */
 }
+
+.countdownElement {
+  font-size: x-large;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
