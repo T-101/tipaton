@@ -11,7 +11,7 @@ const HeaderComponent = (props) => {
                     onMouseOver={() => setAlternateTitle(true)}
                     onMouseLeave={() => setAlternateTitle(false)}
                 >
-                    {props.altered && 'Melkein '}
+                    {props.altered !== 0 && 'Melkein '}
                     {alternateTitle
                         ? 'Dropless Zäni '
                         : 'Tipaton Tammikuu '}

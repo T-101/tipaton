@@ -2,22 +2,34 @@ import React from 'react';
 import {Container} from 'semantic-ui-react'
 import HeaderComponent from './Header';
 import FooterComponent from './Footer';
-import {alteredStartDate, elapsedDays} from '../utils';
+import {
+    alteredStartDate,
+    elapsedDays,
+    getRequiredYear,
+    start,
+    end,
+    developerCracked,
+    showCountdownCard,
+    renderCountdown
+} from '../utils';
 import Grid from "./Grid";
 import Card from "./Card";
 
 export default class MainComponent extends React.Component {
     state = {
         altered: alteredStartDate(),
-        year: new Date().getFullYear(),
+        year: getRequiredYear(new Date()),
         dateTime: new Date(),
-        timerHandler: null
+        timerHandler: null,
+        start: start(),
+        end: end(),
+        developerCracked: developerCracked(process.env.REACT_APP_DEVELOPER_CRACKED)
     };
 
     updateDateTime = () => {
         const date = new Date();
         this.setState({
-            year: date.getFullYear(),
+            year: getRequiredYear(date),
             dateTime: date
         })
     };
@@ -43,6 +55,11 @@ export default class MainComponent extends React.Component {
                         ? <Card header="Saa ottaa!">Ohi on</Card>
                         : <Grid {...this.state} />
                 }
+                {
+                    showCountdownCard(this.state.altered) &&
+                    <Card header={"Tipaton Tammikuu " + Number(this.state.year + 1) + " on alkamassa!"}>
+                        {renderCountdown(this.state.dateTime)}
+                    </Card>}
                 <FooterComponent/>
             </Container>
         )

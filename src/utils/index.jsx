@@ -11,29 +11,61 @@ export function getJsonFromUrl(url) {
 
 export function alteredStartDate() {
     const params = getJsonFromUrl();
-    if ("start" in params) {
-        if (Number(params.start)) {
-            if (0 < Number(params.start) && Number(params.start) < 32) {
-                return params.start
-            }
-        }
-    }
+    return "start" in params && Number(params.start) && Math.abs(params.start) < 365
+        ? Number(params.start)
+        : 0
 }
 
 function leftPad(number) {
     return number < 10 ? "0" + number : number
 }
 
-function start() {
-    const day = alteredStartDate() ? leftPad(alteredStartDate()) : "01";
-    const year = new Date().getFullYear();
-    return new Date(`${year}-01-${day}T00:00`)
+
+export function getRequiredYear(date) {
+    const _date = new Date(date)
+    if (alteredStartDate() < 0) {
+        _date.setFullYear(_date.getFullYear() + 1)
+    }
+    return _date.getFullYear()
 }
 
-function end() {
+export function start() {
+    const year = getRequiredYear(new Date())
+    let date = new Date(`${year}-01-01T00:00`)
+    date.setDate(date.getDate() + alteredStartDate())
+    return date
+}
+
+export function end() {
     let then = start();
     then.setDate(then.getDate() + 31);
     return then
+}
+
+export function showCountdownCard(altered) {
+    return new Date().getMonth() === 11 && !altered
+}
+
+export function renderCountdown(date) {
+    const nextYear = date.getFullYear() + 1
+    let countdownTo = new Date(`${nextYear}-01-01T00:00`)
+    let delta = Math.abs(countdownTo - date) / 1000
+    const days = Math.floor(delta / 86400)
+    delta -= days * 86400
+    const hours = leftPad(Math.floor(delta / 3600) % 24);
+    delta -= hours * 3600;
+    const minutes = leftPad(Math.floor(delta / 60) % 60);
+    delta -= minutes * 60;
+    const seconds = leftPad(Math.floor(delta % 60));
+    return (
+        <div>
+            {days > 0 && <span className="countdownElement">{days}d</span>}
+            <span className="countdownElement">{hours}h</span>
+            <span className="countdownElement">{minutes}m</span>
+            <span className="countdownElement">{seconds}s</span>
+        </div>
+
+    )
 }
 
 export function elapsedDays() {
@@ -155,4 +187,10 @@ export function getLevelName(percent) {
     for (let i = 0; i < levels.length; i++) {
         if (percent < levels[i].percent) return levels[i - 1].name
     }
+}
+
+export function developerCracked(dateString) {
+    if (!dateString) return false
+    const date = new Date(dateString)
+    return date > start() ? date : false
 }
