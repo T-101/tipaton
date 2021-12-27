@@ -16,6 +16,11 @@ export function alteredStartDate() {
         : 0
 }
 
+function leftPad(number) {
+    return number < 10 ? "0" + number : number
+}
+
+
 export function getRequiredYear(date) {
     const _date = new Date(date)
     if (alteredStartDate() < 0) {
@@ -35,6 +40,32 @@ export function end() {
     let then = start();
     then.setDate(then.getDate() + 31);
     return then
+}
+
+export function showCountdownCard(altered) {
+    return new Date().getMonth() === 11 && !altered
+}
+
+export function renderCountdown(date) {
+    const nextYear = date.getFullYear() + 1
+    let countdownTo = new Date(`${nextYear}-01-01T00:00`)
+    let delta = Math.abs(countdownTo - date) / 1000
+    const days = Math.floor(delta / 86400)
+    delta -= days * 86400
+    const hours = leftPad(Math.floor(delta / 3600) % 24);
+    delta -= hours * 3600;
+    const minutes = leftPad(Math.floor(delta / 60) % 60);
+    delta -= minutes * 60;
+    const seconds = leftPad(Math.floor(delta % 60));
+    return (
+        <div>
+            {days > 0 && <span className="countdownElement">{days}d</span>}
+            <span className="countdownElement">{hours}h</span>
+            <span className="countdownElement">{minutes}m</span>
+            <span className="countdownElement">{seconds}s</span>
+        </div>
+
+    )
 }
 
 export function elapsedDays() {
