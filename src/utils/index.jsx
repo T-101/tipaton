@@ -23,7 +23,7 @@ function leftPad(number) {
 
 export function getRequiredYear(date) {
     const _date = new Date(date)
-    if (alteredStartDate() < 0) {
+    if (alteredStartDate() < 0 && date.getFullYear() !== _date.getFullYear()) {
         _date.setFullYear(_date.getFullYear() + 1)
     }
     return _date.getFullYear()
