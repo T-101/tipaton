@@ -9,7 +9,7 @@ export default function Card(props) {
                 <SemanticCard.Header textAlign={headerTextAlign}>
                     {props.header}
                 </SemanticCard.Header>
-                {props.altered &&
+                {props.altered !== 0 && props.start &&
                     <SemanticCard.Content style={{fontSize: 10}}>
                         <strong>Start: </strong>{props.start}<br/>
                         <strong>End: </strong>{props.end}
