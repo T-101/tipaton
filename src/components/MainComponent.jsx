@@ -5,7 +5,6 @@ import FooterComponent from './Footer';
 import {
     alteredStartDate,
     elapsedDays,
-    getRequiredYear,
     start,
     end,
     developerCracked,
@@ -18,7 +17,6 @@ import Card from "./Card";
 export default class MainComponent extends React.Component {
     state = {
         altered: alteredStartDate(),
-        year: getRequiredYear(new Date()),
         dateTime: new Date(),
         timerHandler: null,
         start: start(),
@@ -29,7 +27,6 @@ export default class MainComponent extends React.Component {
     updateDateTime = () => {
         const date = new Date();
         this.setState({
-            year: getRequiredYear(date),
             dateTime: date
         })
     };
