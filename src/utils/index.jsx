@@ -1,9 +1,9 @@
 export function getJsonFromUrl(url) {
     if (!url) url = window.location.search;
-    var query = url.substr(1);
-    var result = {};
+    let query = url.substr(1);
+    let result = {};
     query.split("&").forEach(function (part) {
-        var item = part.split("=");
+        const item = part.split("=");
         result[item[0]] = decodeURIComponent(item[1]);
     });
     return result;
@@ -20,19 +20,11 @@ function leftPad(number) {
     return number < 10 ? "0" + number : number
 }
 
-
-export function getRequiredYear(date) {
-    const _date = new Date(date)
-    if (alteredStartDate() < 0 && date.getFullYear() !== _date.getFullYear()) {
-        _date.setFullYear(_date.getFullYear() + 1)
-    }
-    return _date.getFullYear()
-}
-
 export function start() {
-    const year = getRequiredYear(new Date())
+    const year = new Date().getFullYear()
     let date = new Date(`${year}-01-01T00:00`)
     date.setDate(date.getDate() + alteredStartDate())
+    if (date.getFullYear() < year) date.setFullYear(date.getFullYear() + 1)
     return date
 }
 
