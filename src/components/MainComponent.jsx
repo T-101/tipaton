@@ -21,6 +21,7 @@ export default class MainComponent extends React.Component {
         timerHandler: null,
         start: start(),
         end: end(),
+        year: end().getFullYear(),
         developerCracked: developerCracked(process.env.REACT_APP_DEVELOPER_CRACKED)
     };
 
