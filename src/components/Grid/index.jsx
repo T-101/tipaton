@@ -6,31 +6,31 @@ import React from "react";
 
 export default function Grid(props) {
     return (
-        <SemanticGrid stackable columns={3}>
-            <SemanticGrid.Column>
-                <Card
-                    header={"Päivä " + elapsedDays() + "/31"}
-                    altered={props.altered}
-                    start={start().toDateString()}
-                    end={end().toDateString()}
-                >
-                    {props.developerCracked && "Devaaja murtui " + props.developerCracked.getDate() + ". päivä"}
-                </Card>
-            </SemanticGrid.Column>
-            <SemanticGrid.Column>
-                <Card header={getPercent() + " % Kärsitty"} divider={true}>
-                    {Number(100 - getPercent()).toFixed(3)} % jäljellä
-                </Card>
-                <Card header="Olet tasolla">
-                    {getLevelName(Number(getPercent()))}
-                </Card>
+        <SemanticGrid centered stackable columns={3}>
+            <SemanticGrid.Row>
+                <SemanticGrid.Column>
+                    <Card
+                        header={"Päivä " + elapsedDays() + "/31"}
+                        altered={props.altered}
+                        start={start().toDateString()}
+                        end={end().toDateString()}
+                    >
+                        {props.developerCracked && "Devaaja murtui " + props.developerCracked.getDate() + ". päivä"}
+                    </Card>
+                    <Card header={getPercent() + " % Kärsitty"} divider={true}>
+                        {Number(100 - getPercent()).toFixed(3)} % jäljellä
+                    </Card>
+                    <Card header="Olet tasolla">
+                        {getLevelName(Number(getPercent()))}
+                    </Card>
 
-            </SemanticGrid.Column>
-            <SemanticGrid.Column>
-                <Card header="Jäljellä">
-                    <TableComponent {...props} />
-                </Card>
-            </SemanticGrid.Column>
+                </SemanticGrid.Column>
+                <SemanticGrid.Column>
+                    <Card header="Jäljellä">
+                        <TableComponent {...props} />
+                    </Card>
+                </SemanticGrid.Column>
+            </SemanticGrid.Row>
         </SemanticGrid>
     )
 }
