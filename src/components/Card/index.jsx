@@ -10,13 +10,15 @@ export default function Card(props) {
                     {props.header}
                 </SemanticCard.Header>
                 {props.altered !== 0 && props.start &&
-                    <SemanticCard.Content style={{fontSize: 10}}>
+                    <SemanticCard.Content textAlign={headerTextAlign} style={{fontSize: 10}}>
                         <strong>Start: </strong>{props.start}<br/>
                         <strong>End: </strong>{props.end}
                     </SemanticCard.Content>
                 }
                 {props.divider && <Divider/>}
-                {props.children}
+                <SemanticCard.Content textAlign={headerTextAlign}>
+                    {props.children}
+                </SemanticCard.Content>
             </SemanticCard.Content>
         </SemanticCard>
     )
