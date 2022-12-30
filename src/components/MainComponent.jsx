@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Container} from 'semantic-ui-react'
+import Snowfall from 'react-snowfall'
 import HeaderComponent from './Header';
 import FooterComponent from './Footer';
 import {
@@ -44,6 +45,15 @@ export default function MainComponent() {
                 <Card header={"Tipaton Tammikuu " + Number(year + 1) + " on alkamassa!"}>
                     {renderCountdown(dateTime)}
                 </Card>}
+            {(dateTime.getMonth() === 11 || dateTime.getMonth() === 0) &&
+                <Snowfall
+                    snowflakeCount={250}
+                    color="white"
+                    radius={[0.5, 4.0]}
+                    style={{zIndex: -1}}
+                />
+            }
+
             <FooterComponent/>
         </Container>
     )
