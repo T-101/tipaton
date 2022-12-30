@@ -33,13 +33,13 @@ export default function MainComponent() {
         }
     }, [timerHandler])
 
-    /* useEffect(() => {
+    useEffect(() => {
         if (!stats) {
             fetch("/stats").then(res => res.json()).then(j => setStats(j.results))
         }
-    }, [stats]) */
+    }, [stats])
 
-    useEffect(() => {
+    /* useEffect(() => {
         if (!stats) {
             setStats({
                 pageviews: {
@@ -55,7 +55,7 @@ export default function MainComponent() {
                 }
             })
         }
-    }, [stats])
+    }, [stats]) */
 
 
     return (
