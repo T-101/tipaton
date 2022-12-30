@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Container} from 'semantic-ui-react'
+import {Container, Header, Grid as SemanticGrid} from 'semantic-ui-react'
 import Snowfall from 'react-snowfall'
 import HeaderComponent from './Header';
 import FooterComponent from './Footer';
@@ -24,6 +24,7 @@ export default function MainComponent() {
     const start = funcStart()
     const end = funcEnd()
     const year = funcEnd().getFullYear()
+    const [stats, setStats] = useState()
     const developerCracked = funcDeveloperCracked(process.env.REACT_APP_DEVELOPER_CRACKED)
 
     useEffect(() => {
@@ -31,6 +32,12 @@ export default function MainComponent() {
             setTimerHandler(setInterval(() => setDateTime(new Date()), 1000))
         }
     }, [timerHandler])
+
+    useEffect(() => {
+        if (!stats) {
+            fetch("/stats").then(res => res.json()).then(j => setStats(j.results))
+        }
+    }, [stats])
 
     return (
         <Container text>
@@ -53,6 +60,14 @@ export default function MainComponent() {
                     style={{zIndex: -1}}
                 />
             }
+            {stats && <Header textAlign="center" block>
+                <SemanticGrid columns='equal' style={{fontSize: "12px"}}>
+                    <SemanticGrid.Column>Edelliset 30 päivää</SemanticGrid.Column>
+                    <SemanticGrid.Column>Katsomiskertoja: {stats.pageviews.value}</SemanticGrid.Column>
+                    <SemanticGrid.Column>Vieraita: {stats.visitors.value}</SemanticGrid.Column>
+                    <SemanticGrid.Column>Vierailuja: {stats.visits.value}</SemanticGrid.Column>
+                </SemanticGrid>
+            </Header>}
 
             <FooterComponent/>
         </Container>
