@@ -6,7 +6,7 @@ const HeaderComponent = (props) => {
     return (
         <>
             <Header />
-            <Header textAlign="center" block>
+            <Header textAlign="center" block style={props.style}>
                 <div
                     onMouseOver={() => setAlternateTitle(true)}
                     onMouseLeave={() => setAlternateTitle(false)}

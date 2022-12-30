@@ -14,13 +14,14 @@ export default function Grid(props) {
                         altered={props.altered}
                         start={props.start.toDateString()}
                         end={props.end.toDateString()}
+                        style={props.style}
                     >
                         {props.developerCracked && "Devaaja murtui " + props.developerCracked.getDate() + ". päivä"}
                     </Card>
-                    <Card header={getPercent() + " % Kärsitty"} divider={true}>
+                    <Card header={getPercent() + " % Kärsitty"} divider={true} style={props.style}>
                         {Number(100 - getPercent()).toFixed(3)} % jäljellä
                     </Card>
-                    <Card header="Olet tasolla">
+                    <Card header="Olet tasolla" style={props.style}>
                         {getLevelName(Number(getPercent()))}
                     </Card>
 

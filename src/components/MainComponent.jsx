@@ -15,6 +15,9 @@ import {
 import Grid from "./Grid";
 import Card from "./Card";
 
+const boxShadow = () => {
+    return {boxShadow: "0 3px 3px rgba(0,0,0,0.1)"}
+}
 
 export default function MainComponent() {
 
@@ -60,15 +63,17 @@ export default function MainComponent() {
 
     return (
         <Container text>
-            <HeaderComponent {...{altered, year}}/>
+            <HeaderComponent {...{altered, year}} style={boxShadow()}/>
             {
                 elapsedDays() > 31
-                    ? <Card header="Saa ottaa!">Ohi on</Card>
-                    : <Grid {...{start, end, dateTime, developerCracked}} />
+                    ? <Card header="Saa ottaa!" style={boxShadow()}>Ohi on</Card>
+                    : <Grid {...{start, end, dateTime, developerCracked}} style={boxShadow()}/>
             }
             {
                 showCountdownCard(altered) &&
-                <Card header={"Tipaton Tammikuu " + Number(year + 1) + " on alkamassa!"}>
+                <Card header={"Tipaton Tammikuu " + Number(year + 1) + " on alkamassa!"}
+                      style={boxShadow()}
+                >
                     {renderCountdown(dateTime)}
                 </Card>}
             {(dateTime.getMonth() === 11 || dateTime.getMonth() === 0) &&

@@ -4,7 +4,7 @@ import {Card as SemanticCard, Divider} from 'semantic-ui-react';
 export default function Card(props) {
     const headerTextAlign = props.headerTextAlign || "center";
     return (
-        <SemanticCard fluid>
+        <SemanticCard fluid style={props.style}>
             <SemanticCard.Content>
                 <SemanticCard.Header textAlign={headerTextAlign}>
                     {props.header}
