@@ -33,11 +33,30 @@ export default function MainComponent() {
         }
     }, [timerHandler])
 
-    useEffect(() => {
+    /* useEffect(() => {
         if (!stats) {
             fetch("/stats").then(res => res.json()).then(j => setStats(j.results))
         }
+    }, [stats]) */
+
+    useEffect(() => {
+        if (!stats) {
+            setStats({
+                pageviews: {
+                    value: 66
+                }
+                ,
+                visitors: {
+                    value: 55
+                }
+                ,
+                visits: {
+                    value: 44
+                }
+            })
+        }
     }, [stats])
+
 
     return (
         <Container text>
@@ -61,7 +80,7 @@ export default function MainComponent() {
                 />
             }
             {stats && <Header textAlign="center" block>
-                <SemanticGrid columns='equal' style={{fontSize: "12px"}}>
+                <SemanticGrid stackable columns={5} style={{fontSize: "12px"}}>
                     <SemanticGrid.Column>Edelliset 30 päivää</SemanticGrid.Column>
                     <SemanticGrid.Column>Katsomiskertoja: {stats.pageviews.value}</SemanticGrid.Column>
                     <SemanticGrid.Column>Vieraita: {stats.visitors.value}</SemanticGrid.Column>
