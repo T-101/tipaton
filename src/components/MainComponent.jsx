@@ -84,7 +84,7 @@ export default function MainComponent() {
                     style={{zIndex: -1}}
                 />
             }
-            {stats && <Header textAlign="center" block>
+            {stats && <Header textAlign="center" block style={boxShadow()}>
                 <SemanticGrid stackable columns={5} style={{fontSize: "12px"}}>
                     <SemanticGrid.Column>Edelliset 30 päivää</SemanticGrid.Column>
                     <SemanticGrid.Column>Katsomiskertoja: {stats.pageviews.value}</SemanticGrid.Column>
