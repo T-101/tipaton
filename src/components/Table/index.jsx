@@ -16,7 +16,7 @@ export default function TableComponent(props) {
             <Table.Body>
                 {tableContents.map((row, key) => (
                     <Table.Row key={key}>
-                        <Table.Cell textAlign="right">{getRemaining(props, row.short)}</Table.Cell>
+                        <Table.Cell textAlign="right">{getRemaining(props.dateTime, row.short)}</Table.Cell>
                         <Table.Cell>{row.long}</Table.Cell>
                     </Table.Row>
                 ))}

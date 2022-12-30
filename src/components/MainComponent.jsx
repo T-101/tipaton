@@ -1,65 +1,50 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Container} from 'semantic-ui-react'
 import HeaderComponent from './Header';
 import FooterComponent from './Footer';
 import {
     alteredStartDate,
     elapsedDays,
-    start,
-    end,
-    developerCracked,
+    start as funcStart,
+    end as funcEnd,
+    developerCracked as funcDeveloperCracked,
     showCountdownCard,
     renderCountdown
 } from '../utils';
 import Grid from "./Grid";
 import Card from "./Card";
 
-export default class MainComponent extends React.Component {
-    state = {
-        altered: alteredStartDate(),
-        dateTime: new Date(),
-        timerHandler: null,
-        start: start(),
-        end: end(),
-        year: end().getFullYear(),
-        developerCracked: developerCracked(process.env.REACT_APP_DEVELOPER_CRACKED)
-    };
 
-    updateDateTime = () => {
-        const date = new Date();
-        this.setState({
-            dateTime: date
-        })
-    };
+export default function MainComponent() {
 
-    componentDidMount() {
-        this.setState({
-            timerHandler: setInterval(() => this.updateDateTime(), 1000)
-        })
-    }
+    const altered = alteredStartDate()
+    const [dateTime, setDateTime] = useState(new Date())
+    const [timerHandler, setTimerHandler] = useState(null)
+    const start = funcStart()
+    const end = funcEnd()
+    const year = funcEnd().getFullYear()
+    const developerCracked = funcDeveloperCracked(process.env.REACT_APP_DEVELOPER_CRACKED)
 
-    componentWillUnmount() {
-        this.setState({
-            timerHandler: clearInterval(this.state.timerHandler)
-        })
-    }
+    useEffect(() => {
+        if (!timerHandler) {
+            setTimerHandler(setInterval(() => setDateTime(new Date()), 1000))
+        }
+    }, [timerHandler])
 
-    render() {
-        return (
-            <Container text>
-                <HeaderComponent {...this.state} />
-                {
-                    elapsedDays() > 31
-                        ? <Card header="Saa ottaa!">Ohi on</Card>
-                        : <Grid {...this.state} />
-                }
-                {
-                    showCountdownCard(this.state.altered) &&
-                    <Card header={"Tipaton Tammikuu " + Number(this.state.year + 1) + " on alkamassa!"}>
-                        {renderCountdown(this.state.dateTime)}
-                    </Card>}
-                <FooterComponent/>
-            </Container>
-        )
-    }
+    return (
+        <Container text>
+            <HeaderComponent {...{altered, year}}/>
+            {
+                elapsedDays() > 31
+                    ? <Card header="Saa ottaa!">Ohi on</Card>
+                    : <Grid {...{start, end, dateTime, developerCracked}} />
+            }
+            {
+                showCountdownCard(altered) &&
+                <Card header={"Tipaton Tammikuu " + Number(year + 1) + " on alkamassa!"}>
+                    {renderCountdown(dateTime)}
+                </Card>}
+            <FooterComponent/>
+        </Container>
+    )
 }

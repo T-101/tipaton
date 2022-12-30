@@ -70,9 +70,9 @@ export function getPercent() {
     return secondsElapsed < 0 ? Number(0).toFixed(3) : Number((secondsElapsed / janSeconds) * 100).toFixed(3);
 }
 
-export function getRemaining(that, precision) {
+export function getRemaining(dateTime, precision) {
     const janSeconds = Number((end() - start()) / 1000).toFixed(0);
-    const millisecondsElapsed = (that.dateTime - start());
+    const millisecondsElapsed = (dateTime - start());
     const secondsElapsed = Number((millisecondsElapsed / 1000)).toFixed(0);
     const remaining = janSeconds - secondsElapsed;
     let multiplier = 1;
