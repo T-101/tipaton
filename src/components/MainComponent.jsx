@@ -19,6 +19,13 @@ const boxShadow = () => {
     return {boxShadow: "0 3px 3px rgba(0,0,0,0.1)"}
 }
 
+const backGroundOpacity = (now, elem) => {
+    const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0)
+    let diff = (now.getTime() - midnight.getTime()) / 1000 / 60
+    diff = (diff <= 720) ? diff : 720 - (diff - 720)
+    elem.style.opacity = diff / 720
+}
+
 export default function MainComponent() {
 
     const altered = alteredStartDate()
@@ -29,12 +36,19 @@ export default function MainComponent() {
     const year = funcEnd().getFullYear()
     const [stats, setStats] = useState()
     const developerCracked = funcDeveloperCracked(process.env.REACT_APP_DEVELOPER_CRACKED)
+    const backGround = document.querySelector("#bg")
+
+    backGroundOpacity(new Date(), backGround) // set initial value so the screen doesnt blink at start
 
     useEffect(() => {
         if (!timerHandler) {
-            setTimerHandler(setInterval(() => setDateTime(new Date()), 1000))
+            setTimerHandler(setInterval(() => {
+                const now = new Date()
+                setDateTime(now)
+                backGroundOpacity(now, backGround)
+            }, 1000))
         }
-    }, [timerHandler])
+    }, [timerHandler, backGround])
 
     useEffect(() => {
         if (!stats) {
@@ -92,7 +106,6 @@ export default function MainComponent() {
                     <SemanticGrid.Column>Vierailuja: {stats.visits.value}</SemanticGrid.Column>
                 </SemanticGrid>
             </Header>}
-
             <FooterComponent/>
         </Container>
     )
