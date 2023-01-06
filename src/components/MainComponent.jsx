@@ -10,7 +10,8 @@ import {
     end as funcEnd,
     developerCracked as funcDeveloperCracked,
     showCountdownCard,
-    renderCountdown
+    renderCountdown,
+    easeInOutQuart
 } from '../utils';
 import Grid from "./Grid";
 import Card from "./Card";
@@ -23,7 +24,7 @@ const backGroundOpacity = (now, elem) => {
     const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0)
     let diff = (now.getTime() - midnight.getTime()) / 1000 / 60
     diff = (diff <= 720) ? diff : 720 - (diff - 720)
-    elem.style.opacity = diff / 720
+    elem.style.opacity = easeInOutQuart(diff / 720)
 }
 
 export default function MainComponent() {
