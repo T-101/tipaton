@@ -11,7 +11,7 @@ export function getJsonFromUrl(url) {
 
 export function alteredStartDate() {
     const params = getJsonFromUrl();
-    return "start" in params && Number(params.start) && Math.abs(params.start) < 365
+    return "start" in params && Number(params.start) && Math.abs(params.start) < 30
         ? Number(params.start)
         : 0
 }
@@ -21,10 +21,10 @@ function leftPad(number) {
 }
 
 export function start() {
-    const year = new Date().getFullYear()
-    let date = new Date(`${year}-01-01T00:00`)
+    let date = new Date()
+    let year = (date.getMonth() > 5) ? date.getFullYear() + 1 : date.getFullYear()
+    date = new Date(`${year}-01-01T00:00`)
     date.setDate(date.getDate() + alteredStartDate())
-    if (date.getFullYear() < year) date.setFullYear(date.getFullYear() + 1)
     return date
 }
 
