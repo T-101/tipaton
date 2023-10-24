@@ -12,3 +12,13 @@ jolloin tipattoman laskeminen alkaa jo jouluaattona.
 
 tai: https://saako.ottaa.biss.ee/?start=7
 jolloin tipaton alkaa loppiaisen jälkeen
+
+---
+
+#### Run dev locally:
+    $ docker compose up
+
+#### Build production files
+    $ docker compose run --rm app sh
+    $ cd /frontend
+    $ npm run build
