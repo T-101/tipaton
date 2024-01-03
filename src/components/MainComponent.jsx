@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Container, Header, Grid as SemanticGrid} from 'semantic-ui-react'
+import {Container, Header, Grid as SemanticGrid, AccordionTitle, AccordionContent, Accordion} from 'semantic-ui-react'
 import Snowfall from 'react-snowfall'
 import HeaderComponent from './Header';
 import FooterComponent from './Footer';
@@ -108,6 +108,7 @@ export default function MainComponent() {
     const [stats, setStats] = useState()
     const developerCracked = funcDeveloperCracked(process.env.REACT_APP_DEVELOPER_CRACKED)
     const backGround = document.querySelector("#bg")
+    const [accordionState, setAccordionState] = useState(false)
 
     backGroundOpacity(new Date(), backGround) // set initial value so the screen doesnt blink at start
 
@@ -175,16 +176,23 @@ export default function MainComponent() {
                 />
             }
             {stats && <Header textAlign="center" block style={boxShadow()}>
-                <>
-                    <Line options={chartOptions} data={getData(stats.month.results)}/>
-                    <hr/>
-                    <SemanticGrid stackable columns={5} style={{fontSize: "12px"}}>
-                        <SemanticGrid.Column>Palvelun aloittamisesta</SemanticGrid.Column>
-                        <SemanticGrid.Column>Sivulatauksia: {stats.alltime.results.pageviews.value}</SemanticGrid.Column>
-                        <SemanticGrid.Column>Vieraita: {stats.alltime.results.visitors.value}</SemanticGrid.Column>
-                        <SemanticGrid.Column>Vierailuja: {stats.alltime.results.visits.value}</SemanticGrid.Column>
-                    </SemanticGrid>
-                </>
+                <Accordion>
+                    <AccordionTitle onClick={() => setAccordionState(!accordionState)}>
+                        Katso käyttäjätilastoja
+                    </AccordionTitle>
+                    <AccordionContent active={accordionState}>
+                        <Line options={chartOptions} data={getData(stats.month.results)}/>
+                        <hr/>
+                        <SemanticGrid stackable columns={5} style={{fontSize: "12px"}}>
+                            <SemanticGrid.Column>Palvelun aloittamisesta</SemanticGrid.Column>
+                            <SemanticGrid.Column>Sivulatauksia: {stats.alltime.results.pageviews.value}</SemanticGrid.Column>
+                            <SemanticGrid.Column>Vieraita: {stats.alltime.results.visitors.value}</SemanticGrid.Column>
+                            <SemanticGrid.Column>Vierailuja: {stats.alltime.results.visits.value}</SemanticGrid.Column>
+                        </SemanticGrid>
+
+                    </AccordionContent>
+                </Accordion>
+
             </Header>}
             <h1>&nbsp;</h1>
             <FooterComponent/>
