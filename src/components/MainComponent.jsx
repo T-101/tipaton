@@ -15,6 +15,43 @@ import {
 } from '../utils';
 import Grid from "./Grid";
 import Card from "./Card";
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend,
+} from 'chart.js';
+import {Line} from 'react-chartjs-2';
+
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend
+);
+
+const chartOptions = {
+    responsive: true,
+    plugins: {
+        legend: {
+            position: 'top',
+        },
+        title: {
+            display: true,
+            text: 'Viimeiset 30 päivää',
+        },
+    },
+    interaction: {
+        mode: "index"
+    }
+};
 
 const boxShadow = () => {
     return {boxShadow: "0 3px 3px rgba(0,0,0,0.1)"}
@@ -25,6 +62,39 @@ const backGroundOpacity = (now, elem) => {
     let diff = (now.getTime() - midnight.getTime()) / 1000 / 60
     diff = (diff <= 720) ? diff : 720 - (diff - 720)
     elem.style.opacity = easeInOutQuart(diff / 720)
+}
+
+
+const getData = (data) => {
+    return {
+        labels: data.map(e => e.date),
+        datasets: [
+            {
+                label: "Sivulatauksia",
+                data: data.map(e => e.pageviews),
+                borderColor: 'rgb(0, 140, 186)',
+                backgroundColor: 'rgb(0, 140, 186)',
+                cubicInterpolationMode: 'monotone',
+                tension: 0.4
+            },
+            {
+                label: "Vieraita",
+                data: data.map(e => e.visitors),
+                borderColor: 'rgb(12, 100, 140)',
+                backgroundColor: 'rgb(21, 140, 186)',
+                cubicInterpolationMode: 'monotone',
+                tension: 0.4
+            },
+            {
+                label: "Vierailuja",
+                data: data.map(e => e.visits),
+                borderColor: 'rgb(12, 80, 120)',
+                backgroundColor: 'rgb(21, 128, 166)',
+                cubicInterpolationMode: 'monotone',
+                tension: 0.4
+            }
+        ]
+    }
 }
 
 export default function MainComponent() {
@@ -105,12 +175,16 @@ export default function MainComponent() {
                 />
             }
             {stats && <Header textAlign="center" block style={boxShadow()}>
-                <SemanticGrid stackable columns={5} style={{fontSize: "12px"}}>
-                    <SemanticGrid.Column>Palvelun aloittamisesta</SemanticGrid.Column>
-                    <SemanticGrid.Column>Katsomiskertoja: {stats.alltime.results.pageviews.value}</SemanticGrid.Column>
-                    <SemanticGrid.Column>Vieraita: {stats.alltime.results.visitors.value}</SemanticGrid.Column>
-                    <SemanticGrid.Column>Vierailuja: {stats.alltime.results.visits.value}</SemanticGrid.Column>
-                </SemanticGrid>
+                <>
+                    <Line options={chartOptions} data={getData(stats.month.results)}/>
+                    <hr/>
+                    <SemanticGrid stackable columns={5} style={{fontSize: "12px"}}>
+                        <SemanticGrid.Column>Palvelun aloittamisesta</SemanticGrid.Column>
+                        <SemanticGrid.Column>Sivulatauksia: {stats.alltime.results.pageviews.value}</SemanticGrid.Column>
+                        <SemanticGrid.Column>Vieraita: {stats.alltime.results.visitors.value}</SemanticGrid.Column>
+                        <SemanticGrid.Column>Vierailuja: {stats.alltime.results.visits.value}</SemanticGrid.Column>
+                    </SemanticGrid>
+                </>
             </Header>}
             <h1>&nbsp;</h1>
             <FooterComponent/>
