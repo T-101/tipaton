@@ -53,7 +53,7 @@ export default function MainComponent() {
 
     useEffect(() => {
         if (!stats) {
-            fetch("https://saako.ottaa.biss.ee/stats").then(res => res.json()).then(j => setStats(j.results)).catch(e => console.log(e))
+            fetch("https://saako.ottaa.biss.ee/stats").then(res => res.json()).then(j => setStats(j)).catch(e => console.log(e))
         }
     }, [stats])
 
@@ -96,17 +96,23 @@ export default function MainComponent() {
                     snowflakeCount={250}
                     color="white"
                     radius={[0.5, 4.0]}
-                    style={{zIndex: -1}}
+                    style={{
+                        position: 'fixed',
+                        width: '100vw',
+                        height: '100vh',
+                        zIndex: -1
+                    }}
                 />
             }
             {stats && <Header textAlign="center" block style={boxShadow()}>
                 <SemanticGrid stackable columns={5} style={{fontSize: "12px"}}>
-                    <SemanticGrid.Column>Edelliset 30 päivää</SemanticGrid.Column>
-                    <SemanticGrid.Column>Katsomiskertoja: {stats.pageviews.value}</SemanticGrid.Column>
-                    <SemanticGrid.Column>Vieraita: {stats.visitors.value}</SemanticGrid.Column>
-                    <SemanticGrid.Column>Vierailuja: {stats.visits.value}</SemanticGrid.Column>
+                    <SemanticGrid.Column>Palvelun aloittamisesta</SemanticGrid.Column>
+                    <SemanticGrid.Column>Katsomiskertoja: {stats.alltime.results.pageviews.value}</SemanticGrid.Column>
+                    <SemanticGrid.Column>Vieraita: {stats.alltime.results.visitors.value}</SemanticGrid.Column>
+                    <SemanticGrid.Column>Vierailuja: {stats.alltime.results.visits.value}</SemanticGrid.Column>
                 </SemanticGrid>
             </Header>}
+            <h1>&nbsp;</h1>
             <FooterComponent/>
         </Container>
     )
