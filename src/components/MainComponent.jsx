@@ -53,7 +53,7 @@ export default function MainComponent() {
 
     useEffect(() => {
         if (!stats) {
-            fetch("/stats").then(res => res.json()).then(j => setStats(j.results))
+            fetch("/stats").then(res => res.json()).then(j => setStats(j.results)).catch(e => console.log(e))
         }
     }, [stats])
 
