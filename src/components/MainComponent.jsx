@@ -39,6 +39,7 @@ ChartJS.register(
 
 const chartOptions = {
     responsive: true,
+    aspectRatio: 1.5,
     plugins: {
         legend: {
             position: 'top',
